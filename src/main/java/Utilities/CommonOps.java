@@ -4,7 +4,6 @@ import Extensions.Selenium.BrowserOps;
 import Extensions.Selenium.WaitFor;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.model.Media;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -15,11 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import java.lang.reflect.Method;
-import java.text.DecimalFormat;
 import java.util.Objects;
-
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
 
 public class CommonOps extends Base {
 
@@ -53,7 +48,8 @@ public class CommonOps extends Base {
         String name = method.getAnnotation(Test.class).testName();
         logger = extent.createTest(name);
         testName = name;
-        driver.get("https://www.metric-conversions.org/");
+        if (platform.toLowerCase().equals("web"))
+            driver.get("https://www.metric-conversions.org/");
     }
 
     @AfterMethod()

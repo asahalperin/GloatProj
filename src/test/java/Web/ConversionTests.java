@@ -31,7 +31,7 @@ public class ConversionTests extends CommonOps {
         Verify.textEquals(actualResult1.substring(0, actualResult1.indexOf(" ")), calc.substring(0, calc.indexOf(" ")));
         double actual = StringToDouble(actualResult1, "ft", 3, 2);
         double expected = StringToDouble(calc, "ft", 3, 2);
-        Verify.valueBetween(actual, expected);
+        Verify.valueBetweenNumericValue(actual, expected, 0.009);
     }
 
     @Test(priority = 2, testName = "Verify Ounces to Grams conversion - Valid")
@@ -43,6 +43,6 @@ public class ConversionTests extends CommonOps {
         Conversion.calculateFlow("Ounces", "Grams", conversionValue);
         String actualResult = Update.takeText(resultPage.resultText());
         String actualResult1 = actualResult.substring(actualResult.indexOf("= ")).replaceAll("[^\\d.]", "");
-        Verify.valueBetween(Double.parseDouble(actualResult1), calc);
+        Verify.valueBetweenNumericValue(Double.parseDouble(actualResult1), calc, 0.009);
     }
 }

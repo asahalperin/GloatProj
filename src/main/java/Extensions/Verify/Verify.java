@@ -33,14 +33,31 @@ public class Verify extends Base {
         }
     }
 
-    public static void valueBetween(double actual, double expected) {
+    public static void valueBetweenNumericValue(double actual, double expected, double numericValue) {
         try {
-            if (actual >= expected - 0.009 | actual >= expected + 0.009) {
+            if (actual >= expected - numericValue | actual >= expected + numericValue) {
                 assertTrue(true);
             }
             logger.log(Status.PASS, "Step passed - Expected value is: " + actual + " and Actual value is: " + expected);
         } catch (AssertionError e) {
             logger.log(Status.FAIL, "Step failed - Expected value is: " + actual + " and Actual value is: " + expected);
+            fail(e + "Step failed");
+        } catch (Exception e) {
+            fail(e + "Step failed");
+        }
+    }
+
+    public static void valueBetweenPercent(double actual, double expected, int percentage) {
+        try {
+            double calcPercentage = 100 / actual * expected;
+            int minValue = 100 - percentage;
+            int maxValue = 100 + percentage;
+//            if (calcPercentage >= minValue & calcPercentage <= maxValue)
+            assertTrue(calcPercentage >= minValue & calcPercentage <= maxValue);
+            logger.log(Status.PASS, "Step passed - (Value is in " + percentage + "% range). Expected value is: " + actual + " and Actual value is: " + expected);
+        } catch (AssertionError e) {
+            System.out.println("Expected: " + expected + " but found: " + actual);
+            logger.log(Status.FAIL, "Step failed - (Value is not in " + percentage + "% range). Expected value is: " + actual + " and Actual value is: " + expected);
             fail(e + "Step failed");
         } catch (Exception e) {
             fail(e + "Step failed");
