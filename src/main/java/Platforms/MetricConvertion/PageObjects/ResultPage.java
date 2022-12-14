@@ -13,4 +13,11 @@ public class ResultPage extends Base {
         storeWebElemInDictionary(resultText, "Result text");
         return elem;
     }
+
+    @FindBy(id = "userConvert")
+    private static WebElement convertField;
+    public WebElement convertField() throws Exception {
+        storeWebElemInDictionary(convertField, "Convert field");
+        return elem;
+    }
 }

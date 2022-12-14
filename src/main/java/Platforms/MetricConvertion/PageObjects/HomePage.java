@@ -1,6 +1,7 @@
 package Platforms.MetricConvertion.PageObjects;
 
 import Utilities.Base;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -33,5 +34,12 @@ public class HomePage extends Base {
     public WebElement convertButton() throws Exception {
         storeWebElemInDictionary(convertButton, "Convert button");
         return elem;
+    }
+    @FindBy
+    private static WebElement dynamicButton;
+    public WebElement dynamicButton(String convertFrom, String convertTo) throws Exception {
+        storeWebElemInDictionary(convertButton, "Convert " + convertFrom + " to " + convertTo + " button");
+        String xpath = "//div[@class = 'convertForm']/a[contains(@href, '" + convertFrom.toLowerCase() + "-to-" + convertTo.toLowerCase() + ".htm') and not(contains(text(), 'Click here'))]";
+        return driver.findElement(By.xpath(xpath));
     }
 }

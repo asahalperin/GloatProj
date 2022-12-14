@@ -10,12 +10,14 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
 
+import static Platforms.MetricConvertion.Workflows.HandlePopup.closePopUp;
 import static Utilities.CommonOps.screenShot;
 import static org.testng.Assert.fail;
 
 public class WaitFor extends Base {
     public static void waitUntilVisible(WebElement elem, int timeOutSeconds, int pollingEveryMillis) {
         try {
+            closePopUp();
             FluentWait wait = new FluentWait(driver)
                     .withTimeout(Duration.ofSeconds(timeOutSeconds))
                     .pollingEvery(Duration.ofMillis(pollingEveryMillis))

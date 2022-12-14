@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="RunUI" parallel="false">
+    <test name="Web">
+        <classes>
+            <class name="Web.ConversionTests"></class>
+        </classes>
+    </test>
+</suite>
