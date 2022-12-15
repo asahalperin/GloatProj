@@ -2,11 +2,13 @@ package Utilities;
 
 import Extensions.Selenium.BrowserOps;
 import Extensions.Selenium.WaitFor;
+import Interfaces.Environments;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.model.Media;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -48,8 +50,9 @@ public class CommonOps extends Base {
         String name = method.getAnnotation(Test.class).testName();
         logger = extent.createTest(name);
         testName = name;
-        if (platform.toLowerCase().equals("web"))
-            driver.get("https://www.metric-conversions.org/");
+        if (platform.equals("web")) {
+            driver.get(environment().url());
+        }
     }
 
     @AfterMethod()
@@ -60,6 +63,9 @@ public class CommonOps extends Base {
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
+    }
+    public static Environments environment() {
+        return ConfigFactory.create(Environments.class);
     }
 
     private static void initBrowser() {
@@ -73,13 +79,13 @@ public class CommonOps extends Base {
         elementTranslator.put(elem, elemName);
     }
 
-    public static Media screenShot() {
+    protected static Media screenShot() {
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) Objects.requireNonNull(driver)).getScreenshotAs(OutputType.BASE64);
         Media storedImage = MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build();
         return storedImage;
     }
 
-    public static String convertMetric(double meter) {
+    protected static String convertMetric(double meter) {
         String finalText = feet(meter) + "ft " + inches(meter) + "in";
         return finalText;
     }
@@ -98,7 +104,7 @@ public class CommonOps extends Base {
         return replaceTo0;
     }
 
-    public static double StringToDouble(String value, String cutFrom, int indexValueBefore, int indexValueEnd) {
+    protected static double StringToDouble(String value, String cutFrom, int indexValueBefore, int indexValueEnd) {
         double actualValue = 0;
         String cutBeforeActual = value.substring(value.indexOf(cutFrom) +indexValueBefore);
         String cutAfterActual = cutBeforeActual.substring(0, cutBeforeActual.length() -indexValueEnd);

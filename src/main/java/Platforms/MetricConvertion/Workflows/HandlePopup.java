@@ -1,13 +1,15 @@
 package Platforms.MetricConvertion.Workflows;
 
 import Extensions.Selenium.Click;
+import Extensions.Selenium.WaitFor;
 import Utilities.CommonOps;
 
 public class HandlePopup extends CommonOps {
 
     public static void closePopUp() {
-        if(popups.footerPopup.size() > 0) {
-            Click.popupClose(popups.footerPopup.get(0));
+        for (int i = 0; i < popups.footerPopup.size(); i++) {
+            Click.popupClose(popups.footerPopup.get(i));
+            WaitFor.implicitWait(5);
         }
     }
 }

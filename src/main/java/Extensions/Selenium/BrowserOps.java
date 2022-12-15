@@ -1,14 +1,14 @@
 package Extensions.Selenium;
 
-import Utilities.Base;
+import Utilities.CommonOps;
 
-public class BrowserOps extends Base {
+public class BrowserOps extends CommonOps {
     public static void cleanBrowser() {
         try {
             driver.manage().deleteAllCookies();
             driver.navigate().refresh();
         } catch (Exception e) {
-            System.out.println("Clean browser failed");
+            System.out.println(e.getMessage() + ". Clean browser failed");
         }
 
     }

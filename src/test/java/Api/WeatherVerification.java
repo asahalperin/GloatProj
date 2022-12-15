@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 public class WeatherVerification extends CommonOps {
     @Test(priority = 1, testName =  "Verify Temperature in location")
     public void VerifyTemperature() {
-        RestAssured.baseURI = "https://api.openweathermap.org";
+        RestAssured.baseURI = environment().url();
         String response = given().log().all()
                 .queryParam("zip", "20852,us")
                 .queryParam("appid", "808ccd65fdb0d9ef62b219d282c562d4")

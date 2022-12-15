@@ -1,13 +1,12 @@
 package Extensions.Selenium;
 
-import Utilities.Base;
+import Utilities.CommonOps;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebElement;
 import static Platforms.MetricConvertion.Workflows.HandlePopup.closePopUp;
-import static Utilities.CommonOps.screenShot;
 import static org.testng.Assert.fail;
 
-public class Update extends Base {
+public class Update extends CommonOps {
     public static void text(WebElement elem, String value) {
         try
         {

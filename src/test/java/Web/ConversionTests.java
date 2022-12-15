@@ -34,7 +34,7 @@ public class ConversionTests extends CommonOps {
         Verify.valueBetweenNumericValue(actual, expected, 0.009);
     }
 
-    @Test(priority = 2, testName = "Verify Ounces to Grams conversion - Valid")
+    @Test(priority = 3, testName = "Verify Ounces to Grams conversion - Valid")
     public void VerifyOuncesToGram() throws Exception {
         numberFormat = new DecimalFormat("#.00000");
         double conversionValue = 3.0987;

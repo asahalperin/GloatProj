@@ -1,11 +1,10 @@
 package Extensions.Verify;
 
-import Utilities.Base;
+import Utilities.CommonOps;
 import com.aventstack.extentreports.Status;
-
 import static org.testng.Assert.*;
 
-public class Verify extends Base {
+public class Verify extends CommonOps {
 
     public static void textEquals(String actualText, String expectedText) {
         try {
@@ -35,9 +34,7 @@ public class Verify extends Base {
 
     public static void valueBetweenNumericValue(double actual, double expected, double numericValue) {
         try {
-            if (actual >= expected - numericValue | actual >= expected + numericValue) {
-                assertTrue(true);
-            }
+            assertTrue(actual >= expected - numericValue | actual >= expected + numericValue);
             logger.log(Status.PASS, "Step passed - Expected value is: " + actual + " and Actual value is: " + expected);
         } catch (AssertionError e) {
             logger.log(Status.FAIL, "Step failed - Expected value is: " + actual + " and Actual value is: " + expected);
@@ -52,7 +49,6 @@ public class Verify extends Base {
             double calcPercentage = 100 / actual * expected;
             int minValue = 100 - percentage;
             int maxValue = 100 + percentage;
-//            if (calcPercentage >= minValue & calcPercentage <= maxValue)
             assertTrue(calcPercentage >= minValue & calcPercentage <= maxValue);
             logger.log(Status.PASS, "Step passed - (Value is in " + percentage + "% range). Expected value is: " + actual + " and Actual value is: " + expected);
         } catch (AssertionError e) {
